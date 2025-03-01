@@ -172,7 +172,7 @@ public:
         PLAYERHOOK_ON_FIRST_LOGIN
     }) { }
 
-    void OnPlayerFirstLogin(Player* player)
+    void OnPlayerFirstLogin(Player* player) override
     {
         if (player->GetAreaId() == 4342)
         {
