@@ -147,12 +147,12 @@ void Azerothcore_skip_deathknight_HandleSkip(Player* player)
     if (player->GetTeamId() == TEAM_ALLIANCE)
     {
         player->TeleportTo(0, -8833.37f, 628.62f, 94.00f, 1.06f);//Stormwind
-        player->SetHomebind(Aloc, 1637);// Stormwind Homebind location
+        player->SetHomebind(Aloc, 1519);// Stormwind Homebind location
     }
     else
     {
         player->TeleportTo(1, 1569.59f, -4397.63f, 7.70f, 0.54f);//Orgrimmar
-        player->SetHomebind(Hloc, 1653);// Orgrimmar Homebind location
+        player->SetHomebind(Hloc, 1637);// Orgrimmar Homebind location
     }
 
     if (sConfigMgr->GetOption<bool>("DeleteGold.Deathknight.Optional.Enable", true))
