@@ -206,7 +206,10 @@ public:
             if ((sConfigMgr->GetOption<bool>("Skip.Deathknight.Starter.Enable", true) && player->GetSession()->GetSecurity() == SEC_PLAYER)
                 || (sConfigMgr->GetOption<bool>("GM.Skip.Deathknight.Starter.Enable", false) && player->GetSession()->GetSecurity() >= SEC_MODERATOR))
             {
-                Azerothcore_skip_deathknight_HandleSkip(player);
+                if (!sConfigMgr->GetOption<bool>("Skip.Deathknight.Optional.Enable", false))
+                {
+                    Azerothcore_skip_deathknight_HandleSkip(player);
+                }
             }
         }
     }
