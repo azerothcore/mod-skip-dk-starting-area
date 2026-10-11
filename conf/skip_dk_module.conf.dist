@@ -7,8 +7,8 @@
 #
 #    Skip.Deathknight.Starter.Announce.enable
 #         Description: Announces Module when player logs in.
-#         Default:    0 - (Disabled)
-#                     1 - (Enabled)
+#         Default:    1 - (Enabled)
+#                     0 - (Disabled)
 #
 
 Skip.Deathknight.Starter.Announce.enable = 1
@@ -16,8 +16,8 @@ Skip.Deathknight.Starter.Announce.enable = 1
 #
 #    Skip.DeathKnight.Starter.Enable
 #         Active Module for all new accounts regardless of account level. Instant Skip on DK Creation.
-#         Default:    0 - (Disabled)
-#                     1 - (Enabled)
+#         Default:    1 - (Enabled)
+#                     0 - (Disabled)
 #
 
 Skip.Deathknight.Starter.Enable = 1
@@ -25,9 +25,8 @@ Skip.Deathknight.Starter.Enable = 1
 #
 #    GM.Skip.Deathknight.Starter.Enable
 #         Active Module for all new accounts of a GM account level ONLY. Instant Skip on DK Creation.
-#         Ensure you have Skip.Deathknight.Starter.Enable set to 0 if using this conf.
 #         Default:    0 - (Disabled)
-#                     1 - (Enabled)
+#                     1 - (Enabled) Skip.DeathKnight.Starter.Enable must be 0
 #
 
 GM.Skip.Deathknight.Starter.Enable = 0
@@ -44,23 +43,36 @@ Skip.Deathknight.Start.Level = 58
 #
 #    Skip.Deathknight.Start.Trained
 #         Automatically trains skills up to 58, as might be expected by the end of the start zone.
-#         Default: 0 - (Inactive)
+#         Default:    1 - (Enabled)
+#                     0 - (Disabled)
 #
 
 Skip.Deathknight.Start.Trained = 1
 
 #
 #    Skip.Deathknight.Optional.Enable
-#    Enables optional to skip when talking to lich king on first creation of dk.
-#    Default: 1 - (Active)
+#         Enables optional to skip when talking to lich king on first creation of dk.
+#         Default:    1 - (Enabled)
+#                     0 - (Disabled)
 #
 
 Skip.Deathknight.Optional.Enable = 1
 
 #
 #    DeleteGold.Deathknight.Optional.Enable
-#    Enables option to delete all gold reward from quests on skip of dk. To stop this as sort of exploitative gold income.
-#    Default: 1 - (Active)
+#         Enables option to delete all gold reward from quests on skip of dk. To stop this as sort of exploitative gold income.
+#         Default:    1 - (Enabled)
+#                     0 - (Disabled)
 #
 
 DeleteGold.Deathknight.Optional.Enable = 1
+
+#
+#   Skip.Deathknight.Start.WeaponEnchantment
+#         EnchantmentId to apply to starting DK 2H weapons. This value is the EffectMiscValueA of SPELL_EFFECT_ENCHANT_ITEM
+#         Default:    3369 - (Rune of Cinderglacier)
+#                     3370 - (Rune of Razorice)
+#                     0 - (Disabled)
+#
+
+Skip.Deathknight.Start.WeaponEnchantment = 3369

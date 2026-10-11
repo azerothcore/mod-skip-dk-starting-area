@@ -125,7 +125,7 @@ void Azerothcore_skip_deathknight_HandleSkip(Player* player)
         player->GiveLevel(DKL);
     }
 
-    if (sConfigMgr->GetOption<bool>("Skip.Deathknight.Start.Trained", false))
+    if (sConfigMgr->GetOption<bool>("Skip.Deathknight.Start.Trained", true))
     {
         player->addSpell(49998, SPEC_MASK_ALL, true); // Death Strike rank 1
         player->addSpell(47528, SPEC_MASK_ALL, true); // Mind Freeze
@@ -160,6 +160,21 @@ void Azerothcore_skip_deathknight_HandleSkip(Player* player)
         int DKM = sConfigMgr->GetOption<int32>("StartHeroicPlayerMoney", 2000);
         player->SetMoney(DKM);
     }
+
+    auto ApplyEnchantment = [&](uint32 enchantId, Item* item, Player* player)
+    {
+        // Session may be null, so write enchantment fields directly
+        uint32 base = ITEM_FIELD_ENCHANTMENT_1_1 + PERM_ENCHANTMENT_SLOT * MAX_ENCHANTMENT_OFFSET;
+        item->SetUInt32Value(base + ENCHANTMENT_ID_OFFSET, enchantId);
+        item->SetUInt32Value(base + ENCHANTMENT_DURATION_OFFSET, 0);
+        item->SetUInt32Value(base + ENCHANTMENT_CHARGES_OFFSET, 0);
+        item->SetState(ITEM_CHANGED, player);
+    };
+
+    if (uint32 enchantId = sConfigMgr->GetOption<uint32>("Skip.Deathknight.Start.WeaponEnchantment", 3369)) // Rune of Cinderglacier
+        for (uint32 itemId : {38632, 38633, 38707}) // Greatsword/Greataxe of the Ebon Blade, Runed Soulblade
+            if (Item* item = player->GetItemByEntry(itemId))
+                ApplyEnchantment(enchantId, item, player);
 }
 
 class AzerothCore_skip_deathknight_announce : public PlayerScript
@@ -189,7 +204,7 @@ public:
         {
             //These changes make it so user mistakes in the configuration file don't cause this to run 2x
             if ((sConfigMgr->GetOption<bool>("Skip.Deathknight.Starter.Enable", true) && player->GetSession()->GetSecurity() == SEC_PLAYER)
-                || (sConfigMgr->GetOption<bool>("GM.Skip.Deathknight.Starter.Enable", true) && player->GetSession()->GetSecurity() >= SEC_MODERATOR))
+                || (sConfigMgr->GetOption<bool>("GM.Skip.Deathknight.Starter.Enable", false) && player->GetSession()->GetSecurity() >= SEC_MODERATOR))
             {
                 Azerothcore_skip_deathknight_HandleSkip(player);
             }
